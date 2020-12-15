@@ -1,0 +1,131 @@
+/* general code down here */
+:root{
+    --highlight-color:  #b67b07;
+    --main-txt-color: #fff;
+}
+body{
+    padding: 0;
+    margin: 0;
+}
+.navigation{
+    overflow: hidden;
+    background-color: whitesmoke;
+
+}
+.navigation ul li{
+    display: inline-block;
+    padding: 8px;
+    cursor: pointer;
+}
+.navigation ul li a{
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+}
+.right:hover{
+    border-bottom: 3px solid var(--highlight-color);
+    
+}
+.right{
+    float: right;
+}
+#left a{
+    color: var(--highlight-color);
+    font-weight: 900;
+}
+
+/* student form code here */
+.form > label, input{
+    display: block;
+    width: 85%;
+    margin: auto;
+    padding-top: 5px;
+    padding-left: 5px;
+    height: 1.8rem;
+    
+}
+#firstN, #lastN, #email, #age{
+    border: 1px solid gray;
+}
+.form-div{
+    width: 40%;
+    margin: auto;
+    background: whitesmoke; 
+    height: auto;
+    margin-top: 3rem;
+}
+.main{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url("one.JPG");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100vh;
+}
+h1{
+    background-color: var(--highlight-color);
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    text-align: center;
+    color: var(--main-txt-color);
+}
+.submitBtn{
+    padding: 10px;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    width: 35%;
+    border-radius: 20px;
+    border: 2px solid var(--highlight-color);
+    color: var(--highlight-color);
+    background-color: white;
+    font-size: 1rem;
+    font-weight: 600;
+}
+.submitBtn:hover{
+    background-color: var(--highlight-color);
+    color: var(--main-txt-color);
+}
+.btn{
+    display: flex;
+    justify-content: center;
+}
+
+/* student info code  down here */
+.main2{
+    height: 100vh;
+    background-color: #F7E8EC;
+}
+h2{
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    text-align: center;
+    color: var(--highlight-color); 
+    font-size: 2.3rem;
+    text-shadow: 2px 1px 0px rgba(26, 25, 25, 0.5);
+}
+table{
+    width: 80%;
+    margin: auto;
+    background-color: whitesmoke;
+    box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.5); 
+    margin-bottom: 2rem;
+}
+table, th, td{
+    border: 1px solid gray;
+    border-collapse: collapse;
+    padding: 5px;
+}
+th{
+    background-color: var(--highlight-color);
+    color: var(--main-txt-color);
+    padding: 10px;
+    font-size: 18px;
+}
+@media only screen and (max-width: 780px){
+    .form-div{
+        width: 90%;
+    }
+    .main{
+        height: auto;
+    }
+}
