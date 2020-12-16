@@ -1,14 +1,3 @@
-
-//retrive data of saved students from database
-const getSavedStudentInfo = async () => {
-    const response = await fetch("http://localhost:8081/students");
-    const students = await response.json();
-    students.forEach((student)=>{
-        renderStudentDOM(student)
-    });
-}
-getSavedStudentInfo();
-
 //this is the retrieved array of objects of students
 // let students = getSavedStudentInfo()
 
@@ -28,6 +17,15 @@ $(function(){
             $(tableRow).append(studentId, studentFirstName, studentLastName, studentEmail, studentAge);
         
     };
+    //retrive data of saved students from database
+    const getSavedStudentInfo = async () => {
+        const response = await fetch("http://localhost:8081/students");
+        const students = await response.json();
+        students.forEach((student)=>{
+            renderStudentDOM(student)
+        });
+    }
+    getSavedStudentInfo();
     // for(let student of students){
     //     renderStudentDOM(student)
     // };

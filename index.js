@@ -1,5 +1,6 @@
 //import express
 let express = require('express');
+let cors = require('cors');
 let bodyParser = require('body-parser');
 let mongoose = require('mongoose');
 let studentRoutes = require('./Routes/studentRoutes');
@@ -31,6 +32,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
+app.use(cors());
 
 //use API routes in the app
 app.use('/students', studentRoutes);
