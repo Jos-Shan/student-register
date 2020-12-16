@@ -1,30 +1,25 @@
 
-//retrive data of saved students from local storage if any
-const getSavedStudentInfo = () => {
-    const studentsJSON = localStorage.getItem('students')
-
-    try {
-        return studentsJSON ? JSON.parse(studentsJSON) : []
-    } catch (e) {
-        return []
-    }
+//retrive data of saved students from database
+const getSavedStudentInfo = async () => {
+    const response = await fetch("http://localhost:8081/students");
+    const students = await response.json();
+    students.forEach((student)=>{
+        renderStudentDOM(student)
+    });
 }
-
-//saving student infomation to local storage
-const saveStudents = (students) => {
-    localStorage.setItem('students', JSON.stringify(students))
-}
+getSavedStudentInfo();
 
 //this is the retrieved array of objects of students
-let students = getSavedStudentInfo()
+// let students = getSavedStudentInfo()
 
+let students = []
 
 $(function(){
     let renderStudentDOM = (student)=>{
         let tableRow = $('<tr>' , {class: 'tableRow'});
             $('.display-area').append(tableRow);
             
-            let studentId = $(`<td>${student.id}</td>`);
+            let studentId = $(`<td>${student._id}</td>`);
             let studentFirstName = $(`<td>${student.firstName}</td>`);
             let studentLastName = $(`<td>${student.lastName}</td>`);
             let studentEmail = $(`<td>${student.email}</td>`);
@@ -33,39 +28,50 @@ $(function(){
             $(tableRow).append(studentId, studentFirstName, studentLastName, studentEmail, studentAge);
         
     };
-    for(let student of students){
-        renderStudentDOM(student)
-    };
+    // for(let student of students){
+    //     renderStudentDOM(student)
+    // };
 
     let firstNameInput = $('#firstN');
     let lastNameInput = $('#lastN');
     let emailInput = $('#email');
     let ageInput = $('#age');
 
-    $('.submitBtn').click((e)=>{
+    $('.submitBtn').click( async (e)=>{
         e.preventDefault();
-
+        
         if(firstNameInput.val()=== '' || lastNameInput.val()=== '' || emailInput.val()==='' || ageInput.val() === ''){
             alert("Fill out all fields");
         } else {
             const studentItem = (
                 {
-                    id: students.length + 1,
                     firstName: firstNameInput.val(),
                     lastName: lastNameInput.val(),
                     email: emailInput.val(),
                     age: ageInput.val()
                 }
             );
-            students.push(studentItem);
-            saveStudents(students);
-            renderStudentDOM(studentItem);
+            const response = await fetch("http://localhost:8081/students", {
+                method: "POST",
+                body: JSON.stringify(studentItem),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+    
+            const student = await response.json();
+    
+            // students.push(studentItem);
+            // saveStudents(students);
+            renderStudentDOM(student);
     
             firstNameInput.val('');
             lastNameInput.val('');
             emailInput.val('');
             ageInput.val('')
-        } 
+        };
+        
+        
     })
         
 });
