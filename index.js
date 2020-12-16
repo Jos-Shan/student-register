@@ -3,6 +3,7 @@ let express = require('express');
 let bodyParser = require('body-parser');
 let mongoose = require('mongoose');
 let studentRoutes = require('./Routes/studentRoutes');
+let userRoutes = require('./Routes/userRoutes');
 
 //start app
 let app = express();
@@ -33,6 +34,7 @@ app.use(bodyParser.json());
 
 //use API routes in the app
 app.use('/students', studentRoutes);
+app.use('/user', userRoutes);
 
 
 

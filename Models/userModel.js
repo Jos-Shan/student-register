@@ -31,39 +31,39 @@ const UserSchema = mongoose.Schema({
 
 });
 
-StudentSchema.pre('save', async function(next){
+UserSchema.pre('save', async function(next){
     //hash passwords before saving them
-    const student = this
-    if(student.isModified('password')){
-        student.password = await bcrypt.hash(student.password, 8)
+    const user = this
+    if(user.isModified('password')){
+        user.password = await bcrypt.hash(user.password, 8)
     }
     next()
 });
 
-StudentSchema.methods.generateAuthToken = async function(){
+UserSchema.methods.generateAuthToken = async function(){
     //generate an auth token for admin
-    const student = this
-    const token = jwt.sign({_id: student_id}, process.env.JWT_KEY)
-    student.tokens = student.tokens.concat({token})
-    await student.save()
+    const user = this
+    const token = jwt.sign({_id: user_id}, process.env.JWT_KEY) //generate jwt_key
+    user.tokens = user.tokens.concat({user})
+    await user.save()
     return token
 };
 
-StudentSchema.statics.findByCredentials = async (email, password) =>{
+UserSchema.statics.findByCredentials = async (email, password) =>{
     //search for admin by email
-    const student = await Admin.findOne({email})
-    if(!student){
+    const user = await User.findOne({email})
+    if(!user){
         throw new Error({error: 'Invalid Login Credentials'})
     }
-    const isPasswordMatch = await bcrypt.compare(password, student.password)
+    const isPasswordMatch = await bcrypt.compare(password, user.password)
     if(!isPasswordMatch){
         throw new Error ({error: 'Invalid Login credentials'})
     }
-    return student
+    return user
 }
 
-var Student = module.exports = mongoose.model("Student", StudentSchema);
+var User = module.exports = mongoose.model("User", UserSchema);
 
 module.exports.get = function(callback, limit){
-    Student.find(callback).limit(limit);
+    User.find(callback).limit(limit);
 }
