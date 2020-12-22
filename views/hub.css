@@ -79,11 +79,11 @@ h1{
     color: var(--highlight-color);
     background-color: white;
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 400;
 }
 .submitBtn:hover{
     background-color: var(--highlight-color);
-    color: var(--main-txt-color);
+    color: var(--main-txt-color) !important;
 }
 .btn{
     display: flex;
@@ -128,4 +128,34 @@ th{
     .main{
         height: auto;
     }
+}
+
+/* Log in code */
+#login-form{
+    margin-top: 100px;
+}
+#login-form > p{
+    float: right;
+    margin-right: 10px;
+}
+.login-span{
+    /* color: blue; */
+    cursor: pointer;
+}
+.main-login{
+    background-color: gray;
+}
+#login-form input{
+    border: none;
+    border-bottom: 1px solid gray;
+}
+#login-form label{
+    margin-top: 5px;
+}
+.submitBtn a{
+    text-decoration: none;
+    color: var(--highlight-color);
+}
+.submitBtn a:hover{
+    color: var(--main-txt-color);
 }

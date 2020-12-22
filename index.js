@@ -36,7 +36,7 @@ app.use(cors());
 
 //use API routes in the app
 app.use('/students', studentRoutes);
-app.use('/user', userRoutes);
+app.use('/users', userRoutes);
 
 
 

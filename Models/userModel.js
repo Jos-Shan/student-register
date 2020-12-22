@@ -22,7 +22,7 @@ const UserSchema = mongoose.Schema({
     },
     password: {
         type: String,
-        require: true,
+        required: true,
     },
     created_at: {
         type: Date,
@@ -41,10 +41,10 @@ UserSchema.pre('save', async function(next){
 });
 
 UserSchema.methods.generateAuthToken = async function(){
-    //generate an auth token for admin
+    //generate an auth token for user
     const user = this
-    const token = jwt.sign({_id: user_id}, process.env.JWT_KEY) //generate jwt_key
-    user.tokens = user.tokens.concat({user})
+    const token = jwt.sign({id: user._id}, 'SomethingInTheRain2018') //generate jwt_key
+
     await user.save()
     return token
 };
@@ -53,11 +53,11 @@ UserSchema.statics.findByCredentials = async (email, password) =>{
     //search for admin by email
     const user = await User.findOne({email})
     if(!user){
-        throw new Error({error: 'Invalid Login Credentials'})
+        return { error: 'Invalid Login Credentials'}
     }
     const isPasswordMatch = await bcrypt.compare(password, user.password)
     if(!isPasswordMatch){
-        throw new Error ({error: 'Invalid Login credentials'})
+        return { error: 'Invalid Login Credentials'}
     }
     return user
 }
